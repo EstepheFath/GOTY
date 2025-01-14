@@ -1,8 +1,10 @@
+import Character.*;
+import java.util.List;
 import Room.Room;
-
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean continueGame = true;
@@ -30,3 +32,38 @@ public class Main {
         scanner.close();
     }
 }
+//    public static void main(String[] args) {
+//
+//        Player hero = CharacterInitializer.createHero();
+//
+//        System.out.println("\n=== Détails du Héros ===");
+//        System.out.println(hero.getDetails());
+//        System.out.println("Inventaire :");
+//        displayInventory(hero.getInventory());
+//
+//        List<Enemy> enemies = CharacterInitializer.createEnemies();
+//
+//        System.out.println("\n=== Détails des Ennemis ===");
+//        for (Enemy enemy : enemies) {
+//            System.out.println(enemy.getDetails());
+//            System.out.println("Inventaire :");
+//            displayInventory(enemy.getInventory());
+//            System.out.println(); // Ligne vide pour séparer les ennemis
+//        }
+
+
+
+    // Méthode pour afficher les éléments d'un inventaire
+//    private static void displayInventory(String[] inventory) {
+//        boolean isEmpty = true;
+//        for (String item : inventory) {
+//            if (item != null) {
+//                System.out.println("- " + item);
+//                isEmpty = false;
+//            }
+//        }
+//        if (isEmpty) {
+//            System.out.println("L'inventaire est vide.");
+//        }
+//    }
+
