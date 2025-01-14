@@ -2,8 +2,6 @@ package Room;
 
 import java.util.Random;
 
-import Character.Player;
-
 public class Room {
     int number;
     RoomType type;
@@ -44,25 +42,4 @@ public class Room {
         }
         return new Room(number, type);
     }
-
-    public static class roomAction {
-    
-        public void roomEffect(Player player) {
-            player.setHealth(player.getHealth() - 20);
-        }
-
-        public void roomEmpty() {
-            return;
-        }
-
-        public void roomCombat(Player player) {
-            return;
-        }
-
-        public void roomTreasure(Player player) {
-            return;
-        }
-    }
-
-
 }

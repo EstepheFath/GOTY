@@ -1,64 +1,21 @@
 package Character;
 
-public class Character {
-    String name;
-    int health;
-    int strength;
-    int speed;
-    int xp;
-    int lvl;
-    enum status{};
-    //Item[] i =[];
+public abstract class Character {
+    protected String name;
+    protected int health;
+    protected int strength;
+    protected String[] inventory;
 
+    private static final int INVENTORY_SIZE = 10;
 
-    public Character(String name, int health, int strength, int speed, int xp, int lvl) {
+    public Character(String name, int health, int strength) {
+        if (health <= 0 || strength < 0) {
+            throw new IllegalArgumentException("La santé doit être supérieure à 0 et la force doit être positive.");
+        }
         this.name = name;
         this.health = health;
         this.strength = strength;
-        this.speed = speed;
-        this.xp = xp;
-        this.lvl = lvl;
-
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getStrength() {
-        return strength;
-    }
-
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getXp() {
-        return xp;
-    }
-
-    public void setXp(int xp) {
-        this.xp = xp;
-    }
-
-    public int getLvl(int lvl) {
-        return lvl;
-    }
-
-    public void setLvl(int lvl) {
-        this.lvl = lvl;
+        this.inventory = new String[INVENTORY_SIZE];
     }
 
     public String getName() {
@@ -68,4 +25,52 @@ public class Character {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        if (health < 0) {
+            throw new IllegalArgumentException("La santé ne peut pas être négative.");
+        }
+        this.health = health;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        if (strength < 0) {
+            throw new IllegalArgumentException("La force ne peut pas être négative.");
+        }
+        this.strength = strength;
+    }
+
+    public String[] getInventory() {
+        return inventory;
+    }
+
+    public boolean addItemToInventory(String item) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] == null) {
+                inventory[i] = item;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean removeItemFromInventory(String item) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (item.equals(inventory[i])) {
+                inventory[i] = null;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public abstract String getDetails();
 }
