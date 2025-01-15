@@ -13,7 +13,7 @@ public class CharacterInitializer {
         String heroName = scanner.nextLine(); // Saisit le nom du héros
 
         // Création d'une instance de Player avec le nom défini par le joueur
-        Player hero = new Player(heroName, 20, 2, 0, 1);
+        Player hero = new Player(heroName, 20, 2, 0, 1, 10);
 
         // Ajout d'objets initiaux dans l'inventaire
         hero.addItemToInventory("Épée de rouillée");
