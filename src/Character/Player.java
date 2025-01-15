@@ -4,14 +4,16 @@ public class Player extends CharacterGame {
     private int xp;
     private int lvl;
     private String equippedItem;
+    private int gold; // Add gold attribute
 
-    public Player(String name, int health, int strength, int xp, int lvl) {
+    public Player(String name, int health, int strength, int xp, int lvl, int gold) {
         super(name, health, strength);
-        if (xp < 0 || lvl < 1) {
-            throw new IllegalArgumentException("L'expérience doit être positive et le niveau doit être supérieur ou égal à 1.");
+        if (xp < 0 || lvl < 1 || gold < 0) {
+            throw new IllegalArgumentException("L'expérience, le niveau et l'or doivent être positifs.");
         }
         this.xp = xp;
         this.lvl = lvl;
+        this.gold = gold; // Initialize gold
         this.equippedItem = null;
     }
 
@@ -35,6 +37,31 @@ public class Player extends CharacterGame {
             throw new IllegalArgumentException("Le niveau doit être supérieur ou égal à 1.");
         }
         this.lvl = lvl;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        if (gold < 0) {
+            throw new IllegalArgumentException("L'or ne peut pas être négatif.");
+        }
+        this.gold = gold;
+    }
+
+    public void addGold(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Le montant ajouté ne peut pas être négatif.");
+        }
+        this.gold += amount;
+    }
+
+    public void subtractGold(int amount) {
+        if (amount < 0 || amount > this.gold) {
+            throw new IllegalArgumentException("Le montant soustrait est invalide.");
+        }
+        this.gold -= amount;
     }
 
     public String getEquippedItem() {
@@ -82,6 +109,6 @@ public class Player extends CharacterGame {
 
     @Override
     public String getDetails() {
-        return "Player: " + name + " (Health: " + health + ", Strength: " + strength + ", XP: " + xp + ", Level: " + lvl + ", Equipped Item: " + (equippedItem != null ? equippedItem : "None") + ")";
+        return "Player: " + name + " (Health: " + health + ", Strength: " + strength + ", XP: " + xp + ", Level: " + lvl + ", Gold: " + gold + ", Equipped Item: " + (equippedItem != null ? equippedItem : "None") + ")";
     }
 }
