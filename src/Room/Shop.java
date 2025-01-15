@@ -17,7 +17,7 @@ public class Shop {
     }
 
     public void displayItems() {
-        System.out.println("Items available for sale:");
+        System.out.println("Item dispo à la vente :");
         for (int i = 0; i < itemsForSale.size(); i++) {
             System.out.println((i + 1) + ". " + itemsForSale.get(i));
         }
