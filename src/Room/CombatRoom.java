@@ -1,6 +1,7 @@
 package Room;
 
 import Character.*;
+import Fight.Fight; // Importation de la classe Fight
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -8,23 +9,27 @@ import java.util.Scanner;
 public class CombatRoom extends Room {
     private Player player;
     private List<Enemy> enemies;
+    private Fight fightHandler; // Instance pour gérer les attaques et l'affichage ASCII
 
     public CombatRoom(Player player) {
         this.player = player;
         this.enemies = CharacterInitializer.createEnemies();
+        this.fightHandler = new Fight(); // Initialisation de l'instance Fight
     }
 
     public CombatRoom() {
-
+        this.fightHandler = new Fight(); // Initialisation de l'instance Fight
     }
 
     @Override
     public void enter() {
         System.out.println("Un ennemi apparaît !");
         Enemy enemy = generateEnemy();
+
+        // Utiliser l'instance de Fight pour afficher l'ASCII de l'ennemi
+        fightHandler.displayEnemyAscii(enemy);
+
         System.out.println("Vous combattez: " + enemy.getName());
-        
-        
         startCombat(enemy);
     }
 
@@ -47,9 +52,10 @@ public class CombatRoom extends Room {
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1": // Attaquer
-                    performAttack(player, enemy);
+                    // Utiliser l'instance de Fight pour effectuer une attaque
+                    fightHandler.performAttack(player, enemy);
                     if (enemy.getHealth() > 0) {
-                        performAttack(enemy, player);
+                        fightHandler.performAttack(enemy, player);
                     }
                     break;
 
@@ -71,15 +77,10 @@ public class CombatRoom extends Room {
         // Conclusion du combat
         if (player.getHealth() > 0 && enemy.getHealth() <= 0) {
             System.out.println("Vous avez vaincu " + enemy.getName() + " !");
+            System.out.println("Vous avez gagné " + enemy.getName() + " PO!");
+
         } else if (player.getHealth() <= 0) {
             System.out.println(enemy.getName() + " vous a vaincu...");
         }
     }
-    
-    private void performAttack(CharacterGame attacker, CharacterGame target) {
-        attacker.attack(target);
-        System.out.printf("%s attaque %s. La santé restante de %s est de %d.%n",
-                attacker.getName(), target.getName(), target.getName(), target.getHealth());
-    }
 }
-
