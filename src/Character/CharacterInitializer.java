@@ -27,7 +27,6 @@ public class CharacterInitializer {
         Enemy jeff = new Enemy("Jeff", 999999999, 33, 1, 999999999, 999999999);
         jeff.addItemToInventory("Chaussette");
 
-        // Ajouter les ennemis à la liste
         enemies.add(gobelin);
         enemies.add(skeleton);
         enemies.add(tRex);
