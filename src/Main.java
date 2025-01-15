@@ -18,18 +18,19 @@ public class Main {
         System.out.println("Personnage créé :");
         System.out.println(player.getDetails());
 
-        
-
         boolean continueGame = true;
-
 
         while (continueGame) {
             System.out.println("Choisis une porte:");
             System.out.println("1 - Porte gauche");
             System.out.println("2 - Porte droite");
+            System.out.println("3 - Ouvrir l'inventaire");
 
             int choice = scanner.nextInt();
-            if (choice != 1 && choice != 2) {
+            if (choice == 3) {
+                InventoryManager.openInventory(player, scanner);
+                continue;
+            } else if (choice != 1 && choice != 2) {
                 System.out.println("Mauvais choix");
                 continue;
             }

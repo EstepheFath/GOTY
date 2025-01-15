@@ -60,8 +60,8 @@ public class CombatRoom extends Room {
                     break;
 
                 case "2": // Inventaire
-                    System.out.println("Vous ouvrez votre inventaire... (Rien ne se passe pour l'instant).");
-                    break;
+                    InventoryManager.openInventory(player, scanner);
+                    continue;
 
                 case "3": // Fuir
                     System.out.println("Vous avez choisi de fuir le combat !");
