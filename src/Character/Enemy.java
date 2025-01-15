@@ -1,6 +1,6 @@
 package Character;
 
-public class Enemy extends Character {
+public class Enemy extends CharacterGame {
     private int spawnNumber;
     private int XPdrop;
     private int POdrop;

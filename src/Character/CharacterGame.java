@@ -1,6 +1,6 @@
 package Character;
 
-public abstract class Character {
+public abstract class CharacterGame {
     protected String name;
     protected int health;
     protected int strength;
@@ -8,7 +8,7 @@ public abstract class Character {
 
     private static final int INVENTORY_SIZE = 10;
 
-    public Character(String name, int health, int strength) {
+    public CharacterGame(String name, int health, int strength) {
         if (health <= 0 || strength < 0) {
             throw new IllegalArgumentException("La santé doit être supérieure à 0 et la force doit être positive.");
         }
@@ -73,4 +73,12 @@ public abstract class Character {
     }
 
     public abstract String getDetails();
+
+    public void attack(CharacterGame target) {
+        if (this.strength > 0 && target.getHealth() > 0) {
+            int damage = this.strength;
+            target.setHealth(Math.max(0, target.getHealth() - damage));
+        }
+    }
 }
+

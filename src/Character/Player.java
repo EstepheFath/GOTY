@@ -1,6 +1,6 @@
 package Character;
 
-public class Player extends Character {
+public class Player extends CharacterGame {
     private int xp;
     private int lvl;
 
