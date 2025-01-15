@@ -11,7 +11,10 @@ public class EventRoom extends Room {
         int eventType = random.nextInt(4); // 0: nothing, 1: treasure chest, 2: shop, 3: trap
 
         switch (eventType) {
-            case 0 -> System.out.println("Ptite Clime il fait bien froid ici");
+            case 0 -> {
+                System.out.println("Ptite Clime il fait bien froid ici");
+                System.out.println("vous avez pris 10 dégats de froid ");
+            }
             case 1 -> {
                 System.out.println("Coffre au centre de la pièce");
                 Loot loot = generateLoot();
