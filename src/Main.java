@@ -1,6 +1,5 @@
 import Character.*;
 import Room.Room;
-import Character.Character;
 import java.util.Scanner;
 
 public class Main {
@@ -23,7 +22,6 @@ public class Main {
 
         boolean continueGame = true;
 
-        Player player = new Player("Hero", 100, 10, 0, 1);
 
         while (continueGame) {
             System.out.println("Choisis une porte:");
