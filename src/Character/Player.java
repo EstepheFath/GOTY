@@ -73,6 +73,7 @@ public class Player extends CharacterGame {
                     break;
                 default:
                     System.out.println("L'objet " + item + " ne peut pas être utilisé.");
+                    addItemToInventory(item); // Re-add the item to the inventory if it cannot be used
             }
         } else {
             System.out.println("L'objet " + item + " n'est pas dans l'inventaire.");

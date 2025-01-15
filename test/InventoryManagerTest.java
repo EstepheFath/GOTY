@@ -1,11 +1,10 @@
-
 import Character.*;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryManagerTest {
@@ -52,7 +51,7 @@ class InventoryManagerTest {
 
     @Test
     void testUseItem() {
-        player.addItemToInventory("Health Potion");
+        player.addItemToInventory("Potion de soin");
 
         Scanner scanner = new Scanner("C\n1\nQ\n"); // Simulate using item and quitting
         InventoryManager.openInventory(player, scanner);
