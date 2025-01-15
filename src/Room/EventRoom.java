@@ -13,6 +13,7 @@ public class EventRoom extends Room {
         switch (eventType) {
             case 0 -> {
                 System.out.println("Ptite Clime il fait bien froid ici");
+
                 System.out.println("vous avez pris 10 dégats de froid ");
             }
             case 1 -> {
