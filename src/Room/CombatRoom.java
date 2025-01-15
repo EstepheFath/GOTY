@@ -77,7 +77,12 @@ public class CombatRoom extends Room {
         // Conclusion du combat
         if (player.getHealth() > 0 && enemy.getHealth() <= 0) {
             System.out.println("Vous avez vaincu " + enemy.getName() + " !");
-            System.out.println("Vous avez gagné " + enemy.getName() + " PO!");
+
+            // Récupérer et ajouter les PO de l'ennemi au joueur
+            int gainedGold = enemy.getPOdrop();
+            player.addGold(gainedGold); // Ajouter les PO au joueur
+            System.out.println("Vous avez gagné " + gainedGold + " PO !");
+            System.out.println("Vous avez maintenant " + player.getGold() + " PO.");
 
         } else if (player.getHealth() <= 0) {
             System.out.println(enemy.getName() + " vous a vaincu...");
