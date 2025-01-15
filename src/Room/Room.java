@@ -1,17 +1,26 @@
 package Room;
 
 import java.util.Random;
+import Character.Player;
 
 public abstract class Room {
     public abstract void enter();
 
+    private static int roomCount = 0;
+
     // Méthode statique pour générer une salle aléatoire
-    public static Room generateRandomRoom() {
+    public static Room generateRandomRoom(Player player) {
         Random random = new Random();
+        roomCount++;
+        System.out.println("Salle numéro: " + roomCount);
+        if (roomCount == 10) {
+            System.out.println("Vous avez gagné");
+            System.exit(0);
+        }
         if (random.nextBoolean()) {
-            return new CombatRoom();
+            return new CombatRoom(player);
         } else {
-            return new EventRoom();
+            return new EventRoom(player);
         }
     }
 }
