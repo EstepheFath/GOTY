@@ -34,7 +34,6 @@ public class EventRoom extends Room {
                 shop.displayItems();
                 handlePurchase(shop);
             }
-
         }
     }
 
@@ -42,11 +41,7 @@ public class EventRoom extends Room {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choisissez un objet à acheter (entrez le numéro):");
         int choice = scanner.nextInt() - 1;
-        Loot purchasedItem = shop.buyItem(choice);
-        if (purchasedItem != null) {
-            System.out.println("Vous avez acheté: " + purchasedItem);
-            player.addItemToInventory(purchasedItem.getName());
-        }
+        shop.buyItem(player, choice);
     }
 
     private Loot generateLoot() {
@@ -56,5 +51,4 @@ public class EventRoom extends Room {
         int index = random.nextInt(lootNames.length);
         return new Loot(lootNames[index], lootValues[index]);
     }
-
 }

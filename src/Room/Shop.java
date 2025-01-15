@@ -1,8 +1,8 @@
 package Room;
 
+import Character.Player;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Shop {
     private List<Loot> itemsForSale;
@@ -23,12 +23,19 @@ public class Shop {
         }
     }
 
-    public Loot buyItem(int index) {
+    public void buyItem(Player player, int index) {
         if (index >= 0 && index < itemsForSale.size()) {
-            return itemsForSale.remove(index);
+            Loot item = itemsForSale.get(index);
+            if (player.getGold() >= item.getValue()) {
+                player.subtractGold(item.getValue());
+                player.addItemToInventory(item.getName());
+                itemsForSale.remove(index);
+                System.out.println("Vous avez acheté " + item.getName() + " pour " + item.getValue() + " or.");
+            } else {
+                System.out.println("Vous n'avez pas assez d'or pour acheter cet objet.");
+            }
         } else {
-            System.out.println("Invalid item selection.");
-            return null;
+            System.out.println("Sélection d'objet invalide.");
         }
     }
 }
