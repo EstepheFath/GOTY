@@ -9,16 +9,16 @@ import java.util.Scanner;
 public class CombatRoom extends Room {
     private Player player;
     private List<Enemy> enemies;
-    private Fight fightHandler; // Instance pour gérer les attaques et l'affichage ASCII
+    private Fight fightHandler;
 
     public CombatRoom(Player player) {
         this.player = player;
         this.enemies = CharacterInitializer.createEnemies();
-        this.fightHandler = new Fight(); // Initialisation de l'instance Fight
+        this.fightHandler = new Fight();
     }
 
     public CombatRoom() {
-        this.fightHandler = new Fight(); // Initialisation de l'instance Fight
+        this.fightHandler = new Fight();
     }
 
     @Override
@@ -26,7 +26,6 @@ public class CombatRoom extends Room {
         System.out.println("Un ennemi apparaît !");
         Enemy enemy = generateEnemy();
 
-        // Utiliser l'instance de Fight pour afficher l'ASCII de l'ennemi
         fightHandler.displayEnemyAscii(enemy);
 
         System.out.println("Vous combattez: " + enemy.getName());
@@ -51,19 +50,18 @@ public class CombatRoom extends Room {
 
             String choice = scanner.nextLine();
             switch (choice) {
-                case "1": // Attaquer
-                    // Utiliser l'instance de Fight pour effectuer une attaque
+                case "1":
                     fightHandler.performAttack(player, enemy);
                     if (enemy.getHealth() > 0) {
                         fightHandler.performAttack(enemy, player);
                     }
                     break;
 
-                case "2": // Inventaire
+                case "2":
                     InventoryManager.openInventory(player, scanner);
                     continue;
 
-                case "3": // Fuir
+                case "3":
                     System.out.println("Vous avez choisi de fuir le combat !");
                     System.out.println("Vous quittez la salle de combat...");
                     return;
@@ -74,11 +72,9 @@ public class CombatRoom extends Room {
             }
         }
 
-        // Conclusion du combat
         if (player.getHealth() > 0 && enemy.getHealth() <= 0) {
             System.out.println("Vous avez vaincu " + enemy.getName() + " !");
 
-            // Récupérer et ajouter les PO de l'ennemi au joueur
             int gainedGold = enemy.getPOdrop();
             player.addGold(gainedGold); // Ajouter l'or au joueur
             System.out.println("Vous avez gagné " + gainedGold + " PO !");
