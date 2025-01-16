@@ -1,9 +1,20 @@
 package Room;
 
+
 import java.util.Random;
 import Character.Player;
 
 public abstract class Room {
+    private String description;
+
+    public Room(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public abstract void enter();
 
     private static int roomCount = 0;

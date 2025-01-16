@@ -74,12 +74,8 @@ public class Game {
             switch (choice) {
                 case 1:
                 case 2:
-                    // Utiliser la méthode statique pour générer une salle
-                    narrateStory("Décrivez la salle que le joueur vient d'entrer.");
-
                     Room room = Room.generateRandomRoom(player);
-
-                    // Entrer dans la salle
+                    narrateStory("Décrivez " + room.getDescription() + " que le joueur vient d'entrer.");
                     room.enter();
                     break;
 
