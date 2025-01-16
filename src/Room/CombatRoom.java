@@ -80,9 +80,19 @@ public class CombatRoom extends Room {
 
             // Récupérer et ajouter les PO de l'ennemi au joueur
             int gainedGold = enemy.getPOdrop();
-            player.addGold(gainedGold); // Ajouter les PO au joueur
+            player.addGold(gainedGold); // Ajouter l'or au joueur
             System.out.println("Vous avez gagné " + gainedGold + " PO !");
             System.out.println("Vous avez maintenant " + player.getGold() + " PO.");
+
+            // Récupérer et ajouter l'XP de l'ennemi au joueur
+            int gainedXp = enemy.getXPdrop();
+            player.addXp(gainedXp); // Ajouter l'expérience au joueur
+            System.out.println("Vous avez gagné " + gainedXp + " XP !");
+            System.out.println("Vous avez maintenant " + player.getXp() + " XP.");
+
+            // Utilisation de XpManager pour gérer le potentiel changement de niveau
+            XpManager xpManager = new XpManager(player); // Crée un gestionnaire d'XP pour ce joueur
+            xpManager.checkXpAndLevelUp(player); // Vérifie et applique les montées de niveau si nécessaire
 
         } else if (player.getHealth() <= 0) {
             System.out.println(enemy.getName() + " vous a vaincu...");

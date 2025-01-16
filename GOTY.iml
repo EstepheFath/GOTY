@@ -8,7 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="bluecatcode.junit.4.10.extended" level="project" />
+    <orderEntry type="library" name="a" level="project" />
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit5.8.1">
         <CLASSES>
@@ -40,5 +40,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="google.api.client.gson" level="project" />
+    <orderEntry type="library" name="squareup.okhttp3.okhttp" level="project" />
   </component>
 </module>

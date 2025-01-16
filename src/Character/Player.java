@@ -64,6 +64,23 @@ public class Player extends CharacterGame {
         this.gold -= amount;
     }
 
+    public void addXp(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Le montant ajouté ne peut pas être négatif.");
+        }
+
+        this.xp += amount;
+
+        // Vérifie si le joueur doit gagner un niveau
+        while (this.xp >= 100) { // Niveau atteint, ajustons XP et niveau
+            this.xp -= 100; // Réduction du surplus d'XP (reste après level-up)
+            this.lvl += 1; // Augmente le niveau du joueur
+            System.out.println("Félicitations ! Vous avez atteint le niveau " + this.lvl + " !");
+        }
+
+        System.out.println("XP actuel: " + this.xp + ". Niveau: " + this.lvl);
+    }
+
     public String getEquippedItem() {
         return equippedItem;
     }
