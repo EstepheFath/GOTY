@@ -1,6 +1,6 @@
 package Room;
 
-import Character.*;
+import Character.Player;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,6 +8,7 @@ public class EventRoom extends Room {
     private Player player;
 
     public EventRoom(Player player) {
+        super("a mysterious room with unknown events");
         this.player = player;
     }
 
