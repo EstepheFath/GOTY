@@ -12,13 +12,15 @@ public class CombatRoom extends Room {
     private Fight fightHandler;
 
     public CombatRoom(Player player) {
+        super("a room filled with enemies ready for combat");
         this.player = player;
         this.enemies = CharacterInitializer.createEnemies();
         this.fightHandler = new Fight();
     }
 
     public CombatRoom() {
-        this.fightHandler = new Fight();
+        super("a room filled with enemies ready for combat");
+        this.fightHandler = new Fight(); // Initialisation de l'instance Fight
     }
 
     @Override
