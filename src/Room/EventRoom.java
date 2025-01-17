@@ -40,9 +40,65 @@ public class EventRoom extends Room {
 
     private void handlePurchase(Shop shop) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choisissez un objet à acheter (entrez le numéro):");
-        int choice = scanner.nextInt() - 1;
-        shop.buyItem(player, choice);
+        boolean shopping = true;
+
+        while (shopping) {
+            shop.displayItems();
+            System.out.println("Choisissez un objet à acheter (entrez le numéro), 0 pour quitter le shop, ou -1 pour attaquer le marchand:");
+            int choice = scanner.nextInt() - 1;
+
+            if (choice == -1) {
+                shopping = false;
+                System.out.println("Vous avez quitté le shop.");
+            } else if (choice == -2) {
+                shopping = false;
+                System.out.println("Vous avez attaqué le marchand !");
+                initiateCombatWithMerchant();
+            } else {
+                shop.buyItem(player, choice);
+            }
+        }
+    }
+
+    private void initiateCombatWithMerchant() {
+        Scanner scanner = new Scanner(System.in);
+        int merchantHealth = 100;
+        int playerHealth = player.getHealth();
+        Random random = new Random();
+
+        System.out.println("Combat avec le marchand commence !");
+        while (merchantHealth > 0 && playerHealth > 0) {
+            System.out.println("1. Attaquer");
+            System.out.println("2. Fuir");
+            int choice = scanner.nextInt();
+
+            if (choice == 1) {
+                int playerDamage = random.nextInt(20) + 1;
+                int merchantDamage = random.nextInt(15) + 1;
+
+                merchantHealth -= playerDamage;
+                playerHealth -= merchantDamage;
+
+                System.out.println("Vous avez infligé " + playerDamage + " dégâts au marchand.");
+                System.out.println("Le marchand vous a infligé " + merchantDamage + " dégâts.");
+                System.out.println("Santé du marchand: " + merchantHealth);
+                System.out.println("Votre santé: " + playerHealth);
+            } else if (choice == 2) {
+                System.out.println("Vous avez fui le combat.");
+                break;
+            } else {
+                System.out.println("Choix invalide, veuillez réessayer.");
+            }
+        }
+
+        if (merchantHealth <= 0) {
+            System.out.println("Vous avez vaincu le marchand !");
+        } else if (playerHealth <= 0) {
+            System.out.println("Vous avez été vaincu par le marchand...");
+            player.setHealth(0); // Set player health to 0 if defeated
+        } else {
+            player.setHealth(playerHealth); // Update player health if they fled
+        }
     }
 
     private Loot generateLoot() {
