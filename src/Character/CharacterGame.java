@@ -117,5 +117,16 @@ public abstract class CharacterGame {
             System.out.println(this.name + " inflige " + totalDamage + " dégâts à " + target.getName());
         }
     }
+
+    public void increaseMaxHealth(int additionalHealth) {
+        if (additionalHealth > 0) {
+            this.maxHealth += additionalHealth;
+            // Ajouter la vie supplémentaire au joueur
+            this.health = Math.min(this.maxHealth, this.health + additionalHealth);
+            System.out.println("Votre vie maximale a augmenté de " + additionalHealth + " !");
+        } else {
+            throw new IllegalArgumentException("La valeur supplémentaire doit être positive.");
+        }
+    }
 }
 
