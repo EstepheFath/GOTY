@@ -1,5 +1,10 @@
 package Character;
 
+import Room.Loot;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class CharacterGame {
     protected String name;
     protected int health;
@@ -76,8 +81,31 @@ public abstract class CharacterGame {
 
     public void attack(CharacterGame target) {
         if (this.strength > 0 && target.getHealth() > 0) {
-            int damage = this.strength;
-            target.setHealth(Math.max(0, target.getHealth() - damage));
+            int totalDamage = this.strength; // Base damage = force du joueur
+
+            // Ajouter les dégâts de l'objet équipé si c'est un Player
+            if (this instanceof Player) {
+                Player player = (Player) this;
+
+                // Liste globale des objets Loot possibles
+                Loot[] allAvailableLoot = {
+                        new Loot("Epée rouillée", 5, 10),   // Épée rouillée : dégâts 10
+                        new Loot("Arc", 10, 15),          // Arc : dégâts 15
+                        new Loot("Glock", 50, 40),        // Pistolet : dégâts 40
+                        new Loot("Potion de vie", 5, 0),   // Potion de soin : dégâts 0
+                        new Loot("Potion d'xp", 10, 0)       // Potion d'XP : dégâts 0
+                };
+
+                // Mapper les objets de l’inventaire (facultatif selon vos besoins)
+                Loot[] mappedInventory = player.mapInventoryNamesToLoot(allAvailableLoot);
+
+                // Ajouter les dégâts de l'arme équipée
+                totalDamage += player.getEquippedItemDamageFromInventory(mappedInventory);
+            }
+
+            // Réduire la santé de la cible
+            target.setHealth(Math.max(0, target.getHealth() - totalDamage));
+            System.out.println(this.name + " inflige " + totalDamage + " dégâts à " + target.getName());
         }
     }
 }
