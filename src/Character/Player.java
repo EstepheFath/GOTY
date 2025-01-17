@@ -1,10 +1,12 @@
 package Character;
 
+import Room.Loot;
+
 public class Player extends CharacterGame {
     private int xp;
     private int lvl;
     private String equippedItem;
-    private int gold; // Add gold attribute
+    private int gold;
 
     public Player(String name, int health, int strength, int xp, int lvl, int gold) {
         super(name, health, strength);
@@ -86,12 +88,14 @@ public class Player extends CharacterGame {
     }
 
     public void equipItem(String item) {
-        if (removeItemFromInventory(item)) {
-            this.equippedItem = item;
-            System.out.println(item + " a été équipé.");
-        } else {
-            System.out.println("L'objet " + item + " n'est pas dans l'inventaire.");
+        for (String inventoryItem : inventory) {
+            if (item != null && item.equals(inventoryItem)) {
+                this.equippedItem = item; // Attribue directement l'objet équipé
+                System.out.println(item + " a été équipé.");
+                return;
+            }
         }
+        System.out.println("L'objet " + item + " n'est pas dans l'inventaire.");
     }
 
     public void unequipItem() {
@@ -127,5 +131,54 @@ public class Player extends CharacterGame {
     @Override
     public String getDetails() {
         return "Player: " + name + " (Health: " + health + ", Strength: " + strength + ", XP: " + xp + ", Level: " + lvl + ", Gold: " + gold + ", Equipped Item: " + (equippedItem != null ? equippedItem : "None") + ")";
+    }
+
+    public int getEquippedItemDamageFromInventory(Loot[] inventoryLoot) {
+        if (this.equippedItem == null) {
+            System.out.println("Aucun objet équipé.");
+            return 0; // Pas de dégâts supplémentaires si aucun objet n'est équipé
+        }
+
+        for (Loot loot : inventoryLoot) {
+            if (loot != null && loot.getName().equals(this.equippedItem)) {
+                System.out.println("Objet équipé trouvé : " + loot.getName() + " avec " + loot.getLootDamage() + " dégâts.");
+                return loot.getLootDamage(); // Retourne les dégâts
+            }
+        }
+
+        System.out.println("L'objet équipé (" + this.equippedItem + ") n'est pas associé à un loot.");
+        return 0; // Aucun bonus si l'objet n'est pas trouvé
+    }
+
+    public Loot[] getInventoryItemsMappedToLoot(Loot[] availableLoot) {
+        Loot[] inventoryLoot = new Loot[this.inventory.length];
+
+        for (int i = 0; i < this.inventory.length; i++) {
+            if (this.inventory[i] != null) {
+                for (Loot loot : availableLoot) {
+                    if (loot.getName().equals(this.inventory[i])) {
+                        inventoryLoot[i] = loot; // Associe l'élément d'inventaire au Loot
+                        break;
+                    }
+                }
+            }
+        }
+        return inventoryLoot;
+    }
+
+    public Loot[] mapInventoryNamesToLoot(Loot[] allAvailableLoot) {
+        Loot[] inventoryLoot = new Loot[this.inventory.length]; // Créer une liste pour stocker les objets Loot de l'inventaire
+
+        for (int i = 0; i < this.inventory.length; i++) {
+            if (this.inventory[i] != null) { // Si un objet est dans l'inventaire
+                for (Loot loot : allAvailableLoot) { // Parcourir tous les objets possibles (`Loot`)
+                    if (loot != null && loot.getName().equals(this.inventory[i])) {
+                        inventoryLoot[i] = loot; // Associer l'objet par nom
+                        break;
+                    }
+                }
+            }
+        }
+        return inventoryLoot; // Retourne les objets Loot correspondant à l'inventaire
     }
 }

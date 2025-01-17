@@ -1,5 +1,6 @@
 import Room.Loot;
 import Room.Shop;
+import Character.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

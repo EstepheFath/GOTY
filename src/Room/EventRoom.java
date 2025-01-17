@@ -47,9 +47,11 @@ public class EventRoom extends Room {
 
     private Loot generateLoot() {
         Random random = new Random();
-        String[] lootNames = {"Rusted Sword", "Bow", "Glock", "HealthPotion", "XPpotion", "ManteauDeMarque", "ManteauDeContrefacon"};
+        String[] lootNames = {"Epée rouillée", "Arc", "Glock", "Potion de vie", "Potion d'xp", "ManteauDeMarque", "ManteauDeContrefacon"};
         int[] lootValues = {5, 10, 50, 5, 10, 50, 5};
+        int[] lootDamages = {10, 15, 40, 0, 0, 0, 0}; // Damage for each loot item, 0 for items without damage.
+
         int index = random.nextInt(lootNames.length);
-        return new Loot(lootNames[index], lootValues[index]);
+        return new Loot(lootNames[index], lootValues[index], lootDamages[index]);
     }
 }

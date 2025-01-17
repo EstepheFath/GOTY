@@ -40,21 +40,9 @@ public class Game {
     }
 
     public void start() {
-        // Demander le nom du joueur au début
+        // Utilisation de la méthode createHero de CharacterInitializer
         System.out.println("Bienvenue dans le jeu !");
-        System.out.println("Veuillez entrer un nom pour votre personnage :");
-        String characterName = "";
-
-        // Validation de saisie : le nom ne doit pas être vide
-        while (characterName == null || characterName.trim().isEmpty()) {
-            characterName = scanner.nextLine();
-            if (characterName.trim().isEmpty()) {
-                System.out.println("Le nom ne peut pas être vide. Veuillez entrer un nom valide :");
-            }
-        }
-
-        // Initialiser le joueur une fois le nom défini
-        player = new Player(characterName, 100, 10, 0, 1, 10); // Init avec des stats par défaut
+        player = CharacterInitializer.createHero(); // Appel à la méthode pour initialiser le joueur
         System.out.println("Personnage créé :");
         System.out.println(player.getDetails());
         narrateStory("Décrivez le début d'une aventure épique dans un donjon étrange.");
