@@ -44,5 +44,6 @@
     <orderEntry type="library" name="squareup.okhttp3.okhttp" level="project" />
     <orderEntry type="library" name="squareup.okio" level="project" />
     <orderEntry type="library" name="google.api.client.gson" level="project" />
+    <orderEntry type="library" name="mongodb.driver.sync" level="project" />
   </component>
 </module>
