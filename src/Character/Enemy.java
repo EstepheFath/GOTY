@@ -5,8 +5,8 @@ public class Enemy extends CharacterGame {
     private int XPdrop;
     private int POdrop;
 
-    public Enemy(String name, int health, int strength, int spawnNumber, int XPdrop, int POdrop) {
-        super(name, health, strength);
+    public Enemy(String name, int health, int strength, int spawnNumber, int XPdrop, int POdrop, int maxHealth) {
+        super(name, health, strength, maxHealth);
         if (spawnNumber < 0 || XPdrop < 0 || POdrop < 0) {
             throw new IllegalArgumentException("Les valeurs spawnNumber, XPdrop et POdrop doivent être positives.");
         }

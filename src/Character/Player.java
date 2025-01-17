@@ -8,14 +8,14 @@ public class Player extends CharacterGame {
     private String equippedItem;
     private int gold;
 
-    public Player(String name, int health, int strength, int xp, int lvl, int gold) {
-        super(name, health, strength);
+    public Player(String name, int health, int maxHealth, int strength, int xp, int lvl, int gold) {
+        super(name, maxHealth, health, strength);
         if (xp < 0 || lvl < 1 || gold < 0) {
             throw new IllegalArgumentException("L'expérience, le niveau et l'or doivent être positifs.");
         }
         this.xp = xp;
         this.lvl = lvl;
-        this.gold = gold; // Initialize gold
+        this.gold = gold;
         this.equippedItem = null;
     }
 
