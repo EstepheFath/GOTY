@@ -8,17 +8,19 @@ import java.util.List;
 public abstract class CharacterGame {
     protected String name;
     protected int health;
+    protected int maxHealth;
     protected int strength;
     protected String[] inventory;
 
     private static final int INVENTORY_SIZE = 10;
 
-    public CharacterGame(String name, int health, int strength) {
+    public CharacterGame(String name, int health, int maxHealth, int strength) {
         if (health <= 0 || strength < 0) {
             throw new IllegalArgumentException("La santé doit être supérieure à 0 et la force doit être positive.");
         }
         this.name = name;
         this.health = health;
+        this.maxHealth = maxHealth;
         this.strength = strength;
         this.inventory = new String[INVENTORY_SIZE];
     }
@@ -29,6 +31,14 @@ public abstract class CharacterGame {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public int getHealth() {
@@ -81,19 +91,18 @@ public abstract class CharacterGame {
 
     public void attack(CharacterGame target) {
         if (this.strength > 0 && target.getHealth() > 0) {
-            int totalDamage = this.strength; // Base damage = force du joueur
+            int totalDamage = this.strength;
 
-            // Ajouter les dégâts de l'objet équipé si c'est un Player
             if (this instanceof Player) {
                 Player player = (Player) this;
 
                 // Liste globale des objets Loot possibles
                 Loot[] allAvailableLoot = {
-                        new Loot("Epée rouillée", 5, 10),   // Épée rouillée : dégâts 10
-                        new Loot("Arc", 10, 15),          // Arc : dégâts 15
-                        new Loot("Glock", 50, 40),        // Pistolet : dégâts 40
-                        new Loot("Potion de vie", 5, 0),   // Potion de soin : dégâts 0
-                        new Loot("Potion d'xp", 10, 0)       // Potion d'XP : dégâts 0
+                        new Loot("Epée rouillée", 5, 10),
+                        new Loot("Arc", 10, 15),
+                        new Loot("Glock", 50, 40),
+                        new Loot("Potion de vie", 5, 0),
+                        new Loot("Potion d'xp", 10, 0)
                 };
 
                 // Mapper les objets de l’inventaire (facultatif selon vos besoins)

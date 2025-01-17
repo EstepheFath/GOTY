@@ -9,7 +9,7 @@ public class Shop {
 
     public Shop() {
         itemsForSale = new ArrayList<>();
-        String[] lootNames = {"Rusted Sword", "Bow", "Glock", "HealthPotion", "XPpotion", "ManteauDeMarque", "ManteauDeContrefacon"};
+        String[] lootNames = {"Epée rouillée", "Arc", "Glock", "Potion de vie", "Potion d'xp", "ManteauDeMarque", "ManteauDeContrefacon"};
         int[] lootValues = {5, 10, 50, 5, 10, 50, 5};
         int[] lootDamages = {10, 15, 40, 0, 0, 0, 0};
         for (int i = 0; i < lootNames.length; i++) {

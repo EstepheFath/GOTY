@@ -17,6 +17,7 @@ public class XpManager {
             System.out.println("Félicitations ! Vous êtes passé au niveau " + player.getLvl() + " !");
             System.out.println("XP restant pour le prochain niveau : " + actualXp);
             System.out.println("Votre force est de " + player.getStrength());
+            System.out.println("Votre vie est de " + (player.getMaxHealth() + 2));
         }
 
         player.setXp(actualXp);
